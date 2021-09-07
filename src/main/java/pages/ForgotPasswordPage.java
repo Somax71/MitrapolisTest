@@ -9,13 +9,29 @@ import static com.codeborne.selenide.WebDriverConditions.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ForgotPasswordPage {
-    private String url = "https://lmslite47vr.demo.mirapolis.ru/mira//Do";
+    private String url;
+
     private SelenideElement loginOrEmail = $(By.name("loginOrEmail"));
     private SelenideElement send = $("Button");
-    private SelenideElement succes = $("div.success");
+    private SelenideElement success = $("div.success");
 
-    public void comparisonUrl(){ webdriver().shouldHave(currentFrameUrlContaining( url)); }
-    public void setLoginOrEmail(){ loginOrEmail.setValue("fominaelena"); }
-    public void sendClick(){ send.click(); }
-    public void succesSend(){ succes.shouldBe(Condition.visible); }
+    public ForgotPasswordPage() {
+        url = "https://lmslite47vr.demo.mirapolis.ru/mira//Do";
+    }
+
+    public void comparisonUrl() {
+        webdriver().shouldHave(currentFrameUrlContaining(url));
+    }
+
+    public void setLoginOrEmail() {
+        loginOrEmail.setValue("fominaelena");
+    }
+
+    public void sendClick() {
+        send.click();
+    }
+
+    public boolean isSuccessSend() {
+        return success.shouldBe(Condition.visible).isDisplayed();
+    }
 }

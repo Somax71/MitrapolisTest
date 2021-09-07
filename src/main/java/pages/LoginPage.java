@@ -12,18 +12,41 @@ public class LoginPage {
     private SelenideElement login = $(By.name("user"));
     private SelenideElement password = $(By.name("password"));
     private SelenideElement enterbutton = $(By.id("button_submit_login_form"));
-    private String baseurl = "https://lmslite47vr.demo.mirapolis.ru/mira";
-    private String url = "https://lmslite47vr.demo.mirapolis.ru/mira/Do";
-    private SelenideElement forgotPassvord = $("table.links-container");
+    private SelenideElement forgotPassword = $("table.links-container");
 
-    public void setLoginValue(String loginValue){
+    private String url;
+
+    public LoginPage() {
+        url = "https://lmslite47vr.demo.mirapolis.ru/mira/Do";
+    }
+
+    public void setLoginValue(String loginValue) {
         login.setValue(loginValue);
     }
-    public void setPasswordValue(String passwordValue){
+
+    public void setPasswordValue(String passwordValue) {
         password.setValue(passwordValue);
     }
-    public void enter(){ enterbutton.click(); }
-    public void comparisonUrl(){  webdriver().shouldHave(currentFrameUrlContaining(url)); }
-    public void open(){ Selenide.open(baseurl); }
-    public void forgotPassvordClick(){ forgotPassvord.click(); }
+
+    public void enter() {
+        enterbutton.click();
+    }
+
+    public boolean isCurrentUrl() {
+        try {
+            webdriver().shouldHave(currentFrameUrlContaining(url));
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    public void open() {
+        Selenide.open(url);
+    }
+
+    public void forgotPasswordClick() {
+        forgotPassword.click();
+    }
 }
