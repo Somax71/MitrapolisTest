@@ -9,5 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class MainPage {
     private SelenideElement role = $("div.avatar-full-current-role");
 
-    public void visibilityСheck(){ role.shouldHave(Condition.text("Сотрудник")); }
+    public boolean isRoleVisibility() {
+        return role.shouldHave(Condition.text("Сотрудник")).isDisplayed();
+    }
 }
